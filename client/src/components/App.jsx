@@ -1,25 +1,29 @@
 import React from "react";
 import Header from "./Header";
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import SearchBar from "./SearchBar";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { Container, Row, Col } from "react-bootstrap";
+import MovieCards from "./MovieCards";
 
-
-function App(){
+function App() {
   return (
-    <Container fluid className="bg-dark text-white p-3">
-      <Row className="align-items-center">
-        <Col className="d-flex gap-3" md={4}>
-          <button>Watched List</button>
-          <button>Wanted List</button>
+    <Container className="mt-4">
+      <Header />
+      <SearchBar />
+
+      {/* Bootstrap Grid for movie cards */}
+      <Row className="g-3 mt-4">
+        <Col md={3}>
+          <MovieCards />
         </Col>
-        <Col className="text-center" md={4}>
-          <h1>Movie App</h1>
+        <Col md={3}>
+          <MovieCards />
         </Col>
-        <Col className="d-flex justify-content-end gap-3" md={4}>
-          <button>Login</button>
-          <button>Signup</button>
+        <Col md={3}>
+          <MovieCards />
+        </Col>
+        <Col md={3}>
+          <MovieCards />
         </Col>
       </Row>
     </Container>
