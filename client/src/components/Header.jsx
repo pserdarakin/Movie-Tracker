@@ -1,19 +1,19 @@
-import React from 'react';
-import { Container, Nav, Navbar } from 'react-bootstrap';
+import React from "react";
+import { Navbar, Nav, Container } from "react-bootstrap";
+import "./Header.css"; // Custom CSS
 
 function Header() {
   return (
-    <Navbar bg="" variant="dark" expand="lg" className="px-3 mt-4 mb-5 me-auto">
-      <Container fluid className='mt-3 mb-2 me-auto'>
-        {/* Navbar Brand + Links */}
-        <Navbar.Brand className="me-3">🎬 Movie Tracker</Navbar.Brand>
+    <Navbar expand="lg" className="transparent-navbar">
+      <Container className="text-white">
+        <Navbar.Brand>🎬 Movie Tracker</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav" className="justify-content-between">
-          <Nav className="me-auto d-flex gap-3">
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="me-auto">
             <Nav.Link href="#watched">Watched List</Nav.Link>
             <Nav.Link href="#wanted">Wanted List</Nav.Link>
           </Nav>
-          <Nav className="d-flex gap-3">
+          <Nav>
             <Nav.Link href="#login">Log in</Nav.Link>
             <Nav.Link href="#signup">Sign up</Nav.Link>
           </Nav>

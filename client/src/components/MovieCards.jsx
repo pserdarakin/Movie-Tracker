@@ -3,7 +3,7 @@ import Card from 'react-bootstrap/Card';
 
 function MovieCards() {
   return (
-    <Card style={{ width: '18rem' }}>
+    <Card style={{ width: '13rem' }}>
       {/* <Card.Img variant="top" src="https://www.imdb.com/title/tt0468569/mediaviewer/rm4023877632/?ref_=tt_ov_i" /> */}
       <Card.Body>
         <Card.Title>Card Title</Card.Title>
