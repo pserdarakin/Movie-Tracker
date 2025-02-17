@@ -1,4 +1,6 @@
-.app-container{
+/* To add image with transparancy  */
+
+/* .app-container{
     position: relative;
     min-height: 100vh;
 }
@@ -12,13 +14,15 @@
     background: url("/Users/serdarakin/Desktop/Portfolio Projects/My Movie App/client/public/background1.png") no-repeat center center;
     background-size: cover;
     z-index: -1;
-}
+} */
 
 .box{
-    margin-top: 300px !important;
-    padding: 50px !important;
+    margin-top: 50px !important;
 }
 
 .cards{
     margin-inline-start: 100px;
+    margin-top: 75px !important;
+    justify-content: center !important;
+    align-items: center !important;
 }

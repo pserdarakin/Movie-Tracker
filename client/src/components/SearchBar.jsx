@@ -1,18 +1,27 @@
-import React from "react";
-import { Container, Row } from 'react-bootstrap';
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
 
-function SearchBar(){
-    return (
-        <Container>
-            <Row>
-                <input type="Search" placeholder="Search the movie" />
-            </Row>
+function SearchBar() {
+  return (
+    <div
+      className="modal show"
+      style={{ display: 'block', position: 'initial' }}
+    >
+      <Modal.Dialog>
+        <Modal.Header>
+          <Modal.Title>Add to your list</Modal.Title>
+        </Modal.Header>
 
-            <Row>
-                <button>Add to the List</button>
-            </Row>
-        </Container>
-    );
+        <Modal.Body>
+          <input type="text" placeholder='Search for the movie..' />
+        </Modal.Body>
+
+        <Modal.Footer>
+
+        </Modal.Footer>
+      </Modal.Dialog>
+    </div>
+  );
 }
 
 export default SearchBar;

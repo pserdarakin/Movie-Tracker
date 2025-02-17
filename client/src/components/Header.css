@@ -1,8 +1,10 @@
-.transparent-navbar {
+
+/* To add image with transparancy  */
+/* .transparent-navbar {
     background-color: transparent;
     position: relative;
     z-index: 1;
-}
+} */
 
 .transparent-navbar .navbar-brand,
 .transparent-navbar .nav-link {
