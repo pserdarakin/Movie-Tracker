@@ -9,16 +9,20 @@ import axios from "axios";
 
 function App() {
 
-  const [array, setArray] = useState([]);
+  const [array, setMovies] = useState([]);
 
-  const fetchAPI = async () => {
-    const response = await axios.get("http://localhost:8080/");
-    setArray(response.data.movies);
-    console.log(response.data.movies);
-  }
+  const fetchMovies = async () => {
+    try {
+      const response = await axios.get("http://localhost:8080/api/movies");
+      console.log("Movies data:", response.data); // Debugging log
+      setMovies(response.data); 
+    } catch (error) {
+      console.error("Error fetching movies:", error);
+    }
+  };
 
   useEffect(() => {
-    fetchAPI();
+    fetchMovies();
   }, []);
 
   return (
@@ -34,27 +38,15 @@ function App() {
 
       <Container className="d-flex justify-content-center min-vh-100 mt-750px">
         <Row md={6}>
-          <Col md={3}>
-            <MovieCards />
-          </Col>
-          <Col md={3}>
-            <MovieCards />
-          </Col>
-          <Col md={3}>
-            <MovieCards />
-          </Col>
-          <Col md={3}>
-            <MovieCards />
-          </Col>
+          {array.map((user, index) => (
+            user.watched_list.map((movie, movieIndex) => (
+              <Col key={`${index}-${movieIndex}`} md={3}>
+                <MovieCards movie={movie} />
+              </Col>
+            ))
+          ))}
         </Row>
       </Container>
-      {/* {array.map((movie, index) => (
-        <div key={index}>
-          <p>{movie}</p>
-          <br />
-        </div>
-      ))} */}
-      
     </div>
   );
 }
