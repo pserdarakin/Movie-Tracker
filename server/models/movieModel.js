@@ -41,19 +41,19 @@ const movieSchema = new Schema({
                 {
                     review_id: {
                         type: Number,
-                        required: true
+                        required: false
                     },
                     user_id: {
                         type: Number,
-                        required: true
+                        required: false
                     },
                     review: {
                         type: String,
-                        required: true
+                        required: false
                     },
                     rating: {
                         type: Number,
-                        required: true,
+                        required: false,
                         min: 0,
                         max: 10
                     }   
