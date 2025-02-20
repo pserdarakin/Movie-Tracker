@@ -1,24 +1,27 @@
-import {React, useState, useEffect} from "react";
+import { React, useState, useEffect } from "react";
 import axios from "axios";
+import { Route, Routes } from "react-router-dom";
 
-// components
+// pages & components
 import Header from "./Header";
 import SearchBar from "./SearchBar";
 import MovieCard from "./MovieCard";
+import Home from "../pages/Home.jsx";
+import Favorites from "../pages/Favorites.jsx";
+import NavBar from "./NavBar.jsx";
 
 // css and styling
-import "./App.css";
+import "../css/App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col, Nav } from "react-bootstrap";
 
 function App() {
-
   const [array, setMovies] = useState([]);
 
   const fetchMovies = async () => {
     try {
       const response = await axios.get("http://localhost:8080/api/movies");
-      setMovies(response.data); 
+      setMovies(response.data);
     } catch (error) {
       console.error("Error fetching movies:", error);
     }
@@ -29,12 +32,16 @@ function App() {
   }, []);
 
   return (
-    <>
-      <MovieCard movie={{title: "Serdar's Film", release_date: "2024"}} />
-    </>
-  )
-
-  
+    <div>
+        <NavBar />
+      <main className="main-content">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/favorites" element={<Favorites />} />
+        </Routes>
+      </main>
+    </div>
+  );
 }
 
 export default App;
