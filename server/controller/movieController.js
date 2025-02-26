@@ -1,39 +1,32 @@
-import { 
-    getAllProfilesService,
-    getProfileByIdService,
-    deleteProfileService,
-    createProfileService,
-    addMovieToWatchedService
-} from "../services/movieService.js";
+import Movie from "../models/movieModel.js";
 
 export const getAllMovies = async (req, res) => {
     try {
-        const profiles = await getAllProfilesService();
+        const profiles = await Movie.find();
         res.status(200).json(profiles);
     } catch (error) {
-        res.status(400).json({error: error.message});
+        res.status(400).json({ error: error.message });
     }
 };
 
 export const getMovieById = async (req, res) => {
-    const {user_id} = req.params;
+    const { user_id } = req.params;
     try {
-        const foundProfile = await getProfileByIdService(user_id);
-
+        const foundProfile = await Movie.findOne({ user_id });
         if (!foundProfile) {
-            return res.status(404).json({ error: "User not found"});
+            return res.status(404).json({ error: "User not found" });
         }
         res.status(200).json(foundProfile);
     } catch (error) {
-        res.status(400).json({error: error.message});
+        res.status(400).json({ error: error.message });
     }
 };
 
 export const deleteMovie = async (req, res) => {
-    const {user_id} = req.params;
+    const { user_id } = req.params;
     try {
-        const result = await deleteProfileService(user_id);
-        if (!result) {
+        const foundProfile = await Movie.findOneAndDelete({ user_id });
+        if (!foundProfile) {
             return res.status(404).json({ error: "User not found" });
         }
         res.status(200).json({ message: "User profile deleted successfully" });
@@ -43,25 +36,33 @@ export const deleteMovie = async (req, res) => {
 };
 
 export const createMovieProfile = async (req, res) => {
-    const {user_id, user_name, user_password, watched_list, wanted_list} = req.body;
+    const { user_name, user_password, watched_list } = req.body;
     try {
-        const newUserProfile = await createProfileService(user_name, user_password, watched_list, wanted_list);
-        res.status(200).json(profile);
+        const latestUserId = await Movie.find().sort({ user_id: -1 }).limit(1);
+        const newUserId = latestUserId.length > 0 ? latestUserId[0].user_id + 1 : 1;
+        const newUserProfile = await Movie.create({
+            user_id: newUserId,
+            user_name,
+            user_password,
+            watched_list
+        });
+        res.status(201).json(newUserProfile);
     } catch (error) {
-        res.status(400).json({error: error.message});
+        res.status(400).json({ error: error.message });
     }
 };
 
 export const addMovieToWatchedList = async (req, res) => {
-    const {user_id} = req.params;
-    const {tmdb_id, title, genre, year, poster, reviews} = req.body;
+    const { user_id } = req.params;
+    const { tmdb_id, reviews } = req.body;
     try {
-        const updatedProfile = await addMovieToWatchedService(user_id, { tmdb_id, title, genre, year, poster, reviews });
-        if (updatedProfile) {
-            res.status(200).json(updatedProfile);
-        } else {
-            res.status(404).json({ error: "User not found" });
+        const userProfile = await Movie.findOne({ user_id });
+        if (!userProfile) {
+            return res.status(404).json({ error: "User not found" });
         }
+        userProfile.watched_list.push({ tmdb_id, reviews });
+        const updatedProfile = await userProfile.save();
+        res.status(200).json(updatedProfile);
     } catch (error) {
         res.status(400).json({ error: error.message });
     }

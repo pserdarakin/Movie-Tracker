@@ -13,6 +13,6 @@ router.get('/', getAllMovies);
 router.get('/:user_id', getMovieById);
 router.delete("/:user_id", deleteMovie);
 router.post('/', createMovieProfile);
-router.post('/:user_id', addMovieToWatchedList);
+router.post('/:user_id/watched', addMovieToWatchedList);
 
 export default router;
