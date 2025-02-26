@@ -1,6 +1,6 @@
 import Movie from "../models/movieModel.js";
 
-export const getAllMovies = async (req, res) => {
+export const getAllUserProfiles = async (req, res) => {
     try {
         const profiles = await Movie.find();
         res.status(200).json(profiles);
@@ -9,10 +9,10 @@ export const getAllMovies = async (req, res) => {
     }
 };
 
-export const getMovieById = async (req, res) => {
-    const { user_id } = req.params;
+export const getUserProfileById = async (req, res) => {
+    const { id } = req.params;
     try {
-        const foundProfile = await Movie.findOne({ user_id });
+        const foundProfile = await Movie.findById(id);
         if (!foundProfile) {
             return res.status(404).json({ error: "User not found" });
         }
@@ -22,10 +22,10 @@ export const getMovieById = async (req, res) => {
     }
 };
 
-export const deleteMovie = async (req, res) => {
-    const { user_id } = req.params;
+export const deleteUserProfile = async (req, res) => {
+    const { id } = req.params;
     try {
-        const foundProfile = await Movie.findOneAndDelete({ user_id });
+        const foundProfile = await Movie.findByIdAndDelete(id);
         if (!foundProfile) {
             return res.status(404).json({ error: "User not found" });
         }
@@ -35,13 +35,10 @@ export const deleteMovie = async (req, res) => {
     }
 };
 
-export const createMovieProfile = async (req, res) => {
+export const createUserProfile = async (req, res) => {
     const { user_name, user_password, watched_list } = req.body;
     try {
-        const latestUserId = await Movie.find().sort({ user_id: -1 }).limit(1);
-        const newUserId = latestUserId.length > 0 ? latestUserId[0].user_id + 1 : 1;
         const newUserProfile = await Movie.create({
-            user_id: newUserId,
             user_name,
             user_password,
             watched_list
@@ -52,11 +49,11 @@ export const createMovieProfile = async (req, res) => {
     }
 };
 
-export const addMovieToWatchedList = async (req, res) => {
-    const { user_id } = req.params;
+export const addMovieToUserWatchedList = async (req, res) => {
+    const { id } = req.params;
     const { tmdb_id, reviews } = req.body;
     try {
-        const userProfile = await Movie.findOne({ user_id });
+        const userProfile = await Movie.findById(id);
         if (!userProfile) {
             return res.status(404).json({ error: "User not found" });
         }

@@ -1,15 +1,12 @@
 import mongoose from "mongoose";
 
-const Schema = mongoose.Schema
+const Schema = mongoose.Schema;
 
 const movieSchema = new Schema({
-    "user_id": {
-        type: Number,
-        required: true
-    },
     "user_name": {
         type: String,
-        required: true
+        required: true,
+        unique: true // Ensure user_name is unique
     },
     "user_password": {
         type: String,
@@ -24,9 +21,6 @@ const movieSchema = new Schema({
             "reviews": [
                 {
                     review_id: {
-                        type: Number,
-                    },
-                    user_id: {
                         type: Number,
                     },
                     review: {

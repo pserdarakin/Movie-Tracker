@@ -1,18 +1,18 @@
 import express from "express";
 import {
-    getAllMovies,
-    getMovieById,
-    deleteMovie,
-    createMovieProfile,
-    addMovieToWatchedList
+    getAllUserProfiles,
+    getUserProfileById,
+    deleteUserProfile,
+    createUserProfile,
+    addMovieToUserWatchedList
 } from "../controller/movieController.js";
 
 const router = express.Router();
 
-router.get('/', getAllMovies);
-router.get('/:user_id', getMovieById);
-router.delete("/:user_id", deleteMovie);
-router.post('/', createMovieProfile);
-router.post('/:user_id/watched', addMovieToWatchedList);
+router.get('/', getAllUserProfiles);
+router.get('/:id', getUserProfileById);
+router.delete("/:id", deleteUserProfile);
+router.post('/', createUserProfile);
+router.post('/:id/watched', addMovieToUserWatchedList);
 
 export default router;
