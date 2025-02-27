@@ -6,7 +6,7 @@ const movieSchema = new Schema({
     "user_name": {
         type: String,
         required: true,
-        unique: true // Ensure user_name is unique
+        unique: true
     },
     "user_password": {
         type: String,
