@@ -64,3 +64,26 @@ export const addMovieToUserWatchedList = async (req, res) => {
         res.status(400).json({ error: error.message });
     }
 };
+
+export const deleteMovieFromUserWatchedList = async (req, res) => {
+    const { id } = req.params;
+    const { tmdb_id } = req.body;
+
+    try {
+        const userProfile = await Movie.findById(id);
+        if (!userProfile) {
+            return res.status(404).json({ error: "User not found" });
+        } else {
+            const updatedList = userProfile.watched_list.filter(movie => movie.tmdb_id !== tmdb_id);
+            if (updatedList.length === userProfile.watched_list.length) {
+                return res.status(404).json({ error: "Movie not found in watched list" });
+            }
+            userProfile.watched_list = updatedList;
+            await userProfile.save();
+
+            res.status(200).json({ message: "Movie deleted successfully" });
+        }
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+};

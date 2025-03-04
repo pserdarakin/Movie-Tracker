@@ -2,30 +2,35 @@ import "../css/Favorites.css";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { findById } from "../services/api";
+import MovieCard from "../components/MovieCard";
 
 function Favorites() {
   const id = "67bf4d4f10798b6200cf2d2a"; 
-  const [movies, setMovies] = useState([]);
+  const [userMovies, setUserMovies] = useState([]);
   const [favorites, setFavorites] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  const fetchMovies = async () => {
+  const fetchUserMovies = async () => {
     try {
-      const response = await axios.get("http://localhost:8080/api/movies");
-      setMovies(response.data);
+      const response = await axios.get(`http://localhost:8080/api/movies/${id}`);
+      setUserMovies(response.data.watched_list);
     } catch (error) {
-      console.error("Error fetching movies:", error);
+      console.error("Error fetching user movies:", error);
+      setError("Failed to load movies...");
+    } finally {
+      setLoading(false);
     }
   };
 
   useEffect(() => {
-    fetchMovies();
+    fetchUserMovies();
   }, []);
 
   useEffect(() => {
     const fetchMovieDetails = async () => {
       try {
-        const watchedMovies = movies.flatMap(user => user.watched_list);
-        const moviePromises = watchedMovies.map(async (movie) => {
+        const moviePromises = userMovies.map(async (movie) => {
           const tmdb_id = movie.tmdb_id;
           if (!tmdb_id) {
             console.error("Missing tmdb_id for movie:", movie);
@@ -36,29 +41,28 @@ function Favorites() {
         });
 
         const movieDetails = await Promise.all(moviePromises);
-        setFavorites(movieDetails.filter(movie => movie !== null)); 
+        setFavorites(movieDetails.filter(movie => movie !== null));
       } catch (error) {
         console.error("Error fetching movie details:", error);
       }
     };
 
-    if (movies.length > 0) {
+    if (userMovies.length > 0) {
       fetchMovieDetails();
     }
-  }, [movies]);
+  }, [userMovies]);
 
   return (
     <div className="favorites">
-      {favorites.length > 0 ? (
-        favorites.map((movie, index) => (
-          <div key={index} className="movie-card">
-            <h3>{movie.title}</h3>
-            <img
-              src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-              alt={movie.title}
-            />
-          </div>
-        ))
+      {error && <div className="error-message">{error}</div>}
+      {loading ? (
+        <div className="loading">Loading...</div>
+      ) : favorites.length > 0 ? (
+        <div className="movies-grid">
+          {favorites.map((movie) => (
+            <MovieCard movie={movie} key={movie.id} showFavoriteButton={false}/>
+          ))}
+        </div>
       ) : (
         <div className="favorites-empty">
           <h2>No Favorite Movies Yet</h2>

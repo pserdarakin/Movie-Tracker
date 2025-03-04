@@ -4,7 +4,8 @@ import {
     getUserProfileById,
     deleteUserProfile,
     createUserProfile,
-    addMovieToUserWatchedList
+    addMovieToUserWatchedList,
+    deleteMovieFromUserWatchedList
 } from "../controller/movieController.js";
 
 const router = express.Router();
@@ -14,5 +15,6 @@ router.get('/:id', getUserProfileById);
 router.delete("/:id", deleteUserProfile);
 router.post('/', createUserProfile);
 router.post('/:id/watched', addMovieToUserWatchedList);
+router.delete('/:id/watched', deleteMovieFromUserWatchedList);
 
 export default router;
