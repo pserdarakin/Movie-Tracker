@@ -1,4 +1,4 @@
-import { React} from "react";
+import { React } from "react";
 import { Route, Routes } from "react-router-dom";
 
 // pages & components
@@ -11,10 +11,9 @@ import "../css/App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
-
   return (
     <div>
-        <NavBar />
+      <NavBar />
       <main className="main-content">
         <Routes>
           <Route path="/" element={<Home />} />

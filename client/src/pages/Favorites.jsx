@@ -25,7 +25,6 @@ function Favorites() {
     const fetchMovieDetails = async () => {
       try {
         const watchedMovies = movies.flatMap(user => user.watched_list);
-        console.log("Watched Movies List:", watchedMovies); // Log the entire watched list
         const moviePromises = watchedMovies.map(async (movie) => {
           const tmdb_id = movie.tmdb_id;
           if (!tmdb_id) {
@@ -33,11 +32,11 @@ function Favorites() {
             return null;
           }
           const movieDetails = await findById(tmdb_id);
-          return movieDetails; // Directly return the movie details
+          return movieDetails;
         });
 
         const movieDetails = await Promise.all(moviePromises);
-        setFavorites(movieDetails.filter(movie => movie !== null)); // Filter out null values
+        setFavorites(movieDetails.filter(movie => movie !== null)); 
       } catch (error) {
         console.error("Error fetching movie details:", error);
       }
