@@ -2,6 +2,7 @@ import express from "express";
 import {
     getAllUserProfiles,
     getUserProfileById,
+    getUserWatchedList,
     deleteUserProfile,
     createUserProfile,
     addMovieToUserWatchedList,
@@ -12,6 +13,7 @@ const router = express.Router();
 
 router.get('/', getAllUserProfiles);
 router.get('/:id', getUserProfileById);
+router.get('/:id/watched', getUserWatchedList)
 router.delete("/:id", deleteUserProfile);
 router.post('/', createUserProfile);
 router.post('/:id/watched', addMovieToUserWatchedList);
