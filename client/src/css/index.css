@@ -2,23 +2,11 @@
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-
-  color-scheme: light dark;
-  color: var(--color-text-light);
-  background-color: var(--color-background-light);
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-
-  --color-primary: #4A90E2;
-  --color-secondary: #50E3C2;
+  --color-primary: #ffff;
+  --color-secondary: #de7f2c;
   --color-accent: #F5A623;
   --color-text-light: #F5F5F5;
   --color-background-light: #333333;
-  --color-text-dark: #333333;
-  --color-background-dark: #F5F5F5;
 }
 
 * {
@@ -29,45 +17,27 @@
 
 html, body {
   overflow-x: hidden;
-}
-
-body {
-  margin: 0;
   width: 100%;
   min-height: 100vh;
-  position: relative;
-  color: var(--color-text-light);
-  background-color: var(--color-background-light);
-}
-
-body.light {
-  color: var(--color-text-dark);
-  background-color: var(--color-background-dark);
-}
-
-body.dark {
   color: var(--color-text-light);
   background-color: var(--color-background-light);
 }
 
 #root {
-  width: 100%;
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
+  width: 100%;
+  min-height: 100vh;
 }
 
 a {
   font-weight: 500;
   color: var(--color-primary);
-  text-decoration: inherit;
-}
-a:hover {
-  color: var(--color-secondary);
+  text-decoration: none;
 }
 
-body.light a {
-  color: var(--color-primary);
+a:hover {
+  color: var(--color-secondary);
 }
 
 h1 {
@@ -81,30 +51,18 @@ button {
   padding: 0.6em 1.2em;
   font-size: 1em;
   font-weight: 500;
-  font-family: inherit;
   background-color: var(--color-primary);
   color: var(--color-text-light);
   cursor: pointer;
   transition: background-color 0.25s, border-color 0.25s;
 }
+
 button:hover {
   background-color: var(--color-secondary);
   border-color: var(--color-accent);
 }
+
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: var(--color-text-dark);
-    background-color: var(--color-background-dark);
-  }
-  a:hover {
-    color: var(--color-secondary);
-  }
-  button {
-    background-color: var(--color-primary);
-  }
 }

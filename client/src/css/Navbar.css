@@ -11,15 +11,29 @@
 .navbar-brand {
   font-size: 1.5rem;
   font-weight: bold;
+  color: #ffffff;
 }
 
 .navbar-links {
   display: flex;
-  gap: 2rem;
-  color: #4A90E2;
+  gap: 1rem;
+  color: #ffffff;
 }
 
-.nav-link {
+.nav-link1 {
+  display: flex;
+  align-items: center;
+  gap: 8px ;
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.nav-link2 {
+  display: flex;
+  align-items: center;
+  gap: 8px ;
   font-size: 1rem;
   padding: 0.5rem 1rem;
   border-radius: 4px;
