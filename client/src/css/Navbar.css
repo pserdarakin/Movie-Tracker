@@ -1,11 +1,15 @@
 .navbar {
-  background-color: #2d2d2d;
-  padding: 1rem 3rem !important;
+  padding: 1rem 6rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   box-sizing: border-box;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  background-color: rgba(0, 0, 0, 0.4);
 }
 
 .navbar-brand {
@@ -20,20 +24,11 @@
   color: #ffffff;
 }
 
-.nav-link1 {
+.nav-link {
   display: flex;
   align-items: center;
-  gap: 8px ;
-  font-size: 1rem;
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
-  transition: background-color 0.2s;
-}
-
-.nav-link2 {
-  display: flex;
-  align-items: center;
-  gap: 8px ;
+  justify-content: center;
+  gap: 6px ;
   font-size: 1rem;
   padding: 0.5rem 1rem;
   border-radius: 4px;

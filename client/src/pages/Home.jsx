@@ -46,6 +46,8 @@ function Home() {
 
   return (
     <div className="home">
+      <h1 className="home-heading">Track. Collect. Relive.</h1>
+      <h2 className="home-heading">More than just movies—your memories, vaulted. Start your journey now.</h2>
       <form onSubmit={handleSearch} className="search-form">
         <input
           type="text"

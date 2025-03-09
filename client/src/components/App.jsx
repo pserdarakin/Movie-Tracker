@@ -8,7 +8,6 @@ import NavBar from "./NavBar.jsx";
 
 // css and styling
 import "../css/App.css";
-import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   return (
