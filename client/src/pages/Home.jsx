@@ -27,27 +27,29 @@ function Home() {
 
   const handleSearch = async (e) => {
     e.preventDefault();
-    if(!searchQuery.trim()) return
-    if (loading) return
+    if (!searchQuery.trim()) return;
+    if (loading) return;
 
-    setLoading(true)
+    setLoading(true);
 
     setSearchQuery("");
     try {
-      const searchResults = await searchMovies(searchQuery)
-      setMovies(searchResults)
-      setError(null)
+      const searchResults = await searchMovies(searchQuery);
+      setMovies(searchResults);
+      setError(null);
     } catch (error) {
-      setError("Failed to search movies...")
+      setError("Failed to search movies...");
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
   };
 
   return (
     <div className="home">
       <h1 className="home-heading">Track. Collect. Relive.</h1>
-      <h2 className="home-heading">More than just movies—your memories, vaulted. Start your journey now.</h2>
+      <h2 className="home-heading">
+        More than just movies—your memories, vaulted. Start your journey now.
+      </h2>
       <form onSubmit={handleSearch} className="search-form">
         <input
           type="text"
@@ -67,9 +69,32 @@ function Home() {
         <div className="loading">Loading...</div>
       ) : (
         <div className="movies-grid">
-          {movies.map((movie) => (
-            <MovieCard movie={movie} key={movie.id} />
-          ))}
+          <div className="movies-section">
+            <h3>Popular Movies</h3>
+            <div className="movies-horizontal-scroll">
+              {movies.map((movie) => (
+                <MovieCard movie={movie} key={movie.id} />
+              ))}
+            </div>
+          </div>
+
+          <div className="movies-section">
+            <h3>Top 250 IMDB Movies</h3>
+            <div className="movies-horizontal-scroll">
+              {movies.map((movie) => (
+                <MovieCard movie={movie} key={movie.id} />
+              ))}
+            </div>
+          </div>
+
+          <div className="movies-section">
+            <h3>Top Movies</h3>
+            <div className="movies-horizontal-scroll">
+              {movies.map((movie) => (
+                <MovieCard movie={movie} key={movie.id} />
+              ))}
+            </div>
+          </div>
         </div>
       )}
     </div>
