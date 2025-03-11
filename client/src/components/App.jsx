@@ -4,6 +4,7 @@ import { Route, Routes } from "react-router-dom";
 // pages & components
 import Home from "../pages/Home.jsx";
 import Favorites from "../pages/Favorites.jsx";
+import AI from "../pages/AI.jsx";
 import NavBar from "./NavBar.jsx";
 
 // css and styling
@@ -17,6 +18,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/favorites" element={<Favorites />} />
+          <Route path="/ai" element={<AI />} />
         </Routes>
       </main>
     </div>
