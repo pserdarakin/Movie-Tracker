@@ -4,6 +4,32 @@
   box-sizing: border-box;
 }
 
+.grid2{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 1rem;
+  min-height: 300px;
+  overflow: hidden;
+  
+}
+
+.movies-grid-fav{
+  display: grid;
+  grid-template-columns: repeat(6, minmax(150px, 1fr));
+  gap: 1rem;
+}
+
+.header {
+  font-size: large;
+  font-weight: bold;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-bottom: #999 solid 2px;
+  /* border-top: #999 solid 2px; */
+}
+
 .favorites h2 {
   margin-bottom: 2rem;
   text-align: center;

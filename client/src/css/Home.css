@@ -33,6 +33,12 @@
   overflow: hidden;
 }
 
+.movies-search-results{
+  display: grid;
+  grid-template-columns: repeat(6, minmax(150px, 1fr));
+  gap: 1rem;
+}
+
 .movies-horizontal-scroll {
   width: 100%;
   overflow-x: auto;

@@ -54,18 +54,21 @@ function Favorites() {
 
   return (
     <div className="favorites">
+      <header className="header">My List</header>
       {error && <div className="error-message">{error}</div>}
       {loading ? (
         <div className="loading">Loading...</div>
       ) : favorites.length > 0 ? (
-        <div className="movies-grid">
+        <div className="grid2">
+        <div className="movies-grid-fav">
           {favorites.map((movie) => (
             <MovieCard movie={movie} key={movie.id} showFavoriteButton={false}/>
           ))}
         </div>
+        </div>
       ) : (
         <div className="favorites-empty">
-          <h2>No Favorite Movies Yet</h2>
+          <h2>No Watched Movies Yet</h2>
           <p>Start adding one...</p>
         </div>
       )}

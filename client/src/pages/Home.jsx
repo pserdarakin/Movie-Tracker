@@ -5,6 +5,7 @@ import "../css/Home.css";
 
 function Home() {
   const [searchQuery, setSearchQuery] = useState("");
+  const [isSearchActive, setisSearchActive] = useState(false);
   const [movies, setMovies] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -31,6 +32,7 @@ function Home() {
     if (loading) return;
 
     setLoading(true);
+    setisSearchActive(true);
 
     setSearchQuery("");
     try {
@@ -62,39 +64,52 @@ function Home() {
           Search
         </button>
       </form>
-
+  
       {error && <div className="error-message">{error}</div>}
-
+  
       {loading ? (
         <div className="loading">Loading...</div>
       ) : (
         <div className="movies-grid">
-          <div className="movies-section">
-            <h3>Popular Movies</h3>
-            <div className="movies-horizontal-scroll">
-              {movies.map((movie) => (
-                <MovieCard movie={movie} key={movie.id} />
-              ))}
+          {isSearchActive ? (
+            <div className="movies-section">
+              <h3>Search Results</h3>
+              <div className="movies-search-results">
+                {movies.map((movie) => (
+                  <MovieCard movie={movie} key={movie.id} />
+                ))}
+              </div>
             </div>
-          </div>
-
-          <div className="movies-section">
-            <h3>Top 250 IMDB Movies</h3>
-            <div className="movies-horizontal-scroll">
-              {movies.map((movie) => (
-                <MovieCard movie={movie} key={movie.id} />
-              ))}
-            </div>
-          </div>
-
-          <div className="movies-section">
-            <h3>Top Movies</h3>
-            <div className="movies-horizontal-scroll">
-              {movies.map((movie) => (
-                <MovieCard movie={movie} key={movie.id} />
-              ))}
-            </div>
-          </div>
+          ) : (
+            <>
+              <div className="movies-section">
+                <h3>Popular Movies</h3>
+                <div className="movies-horizontal-scroll">
+                  {movies.map((movie) => (
+                    <MovieCard movie={movie} key={movie.id} />
+                  ))}
+                </div>
+              </div>
+  
+              <div className="movies-section">
+                <h3>Top 250 IMDB Movies</h3>
+                <div className="movies-horizontal-scroll">
+                  {movies.map((movie) => (
+                    <MovieCard movie={movie} key={movie.id} />
+                  ))}
+                </div>
+              </div>
+  
+              <div className="movies-section">
+                <h3>Top Movies</h3>
+                <div className="movies-horizontal-scroll">
+                  {movies.map((movie) => (
+                    <MovieCard movie={movie} key={movie.id} />
+                  ))}
+                </div>
+              </div>
+            </>
+          )}
         </div>
       )}
     </div>
