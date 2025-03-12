@@ -18,6 +18,10 @@ function MovieCard({ movie, showFavoriteButton = true }) {
     }
   }
 
+  async function onDetailClick() {
+    alert("Clicked");
+  }
+
   return (
     <div className="movie-card">
 
@@ -35,7 +39,7 @@ function MovieCard({ movie, showFavoriteButton = true }) {
           </div>
         </div>
 
-        <div className="movie-info">
+        <div className="movie-info" onClick={onDetailClick}>
           <h3>{movie.title}</h3>
           <p>{movie.release_date?.split("-")[0]}</p>
           <p><strong>⭑</strong> {movie.vote_average.toFixed(1)}/10</p>
