@@ -38,6 +38,7 @@ function MovieCard({ movie, showFavoriteButton = true }) {
         <div className="movie-info">
           <h3>{movie.title}</h3>
           <p>{movie.release_date?.split("-")[0]}</p>
+          <p><strong>⭑</strong> {movie.vote_average.toFixed(1)}/10</p>
         </div>
 
     </div>
