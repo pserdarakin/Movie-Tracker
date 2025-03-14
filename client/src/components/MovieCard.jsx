@@ -1,9 +1,12 @@
 import "../css/MovieCard.css";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function MovieCard({ movie, showFavoriteButton = true }) {
+  const navigate = useNavigate();
 
-  async function onFavoriteClick() {
+  async function onFavoriteClick(event) {
+    event.stopPropagation();
     const id = "67bf4d4f10798b6200cf2d2a";
     const response = await axios.get(`http://localhost:8080/api/movies/${id}/watched`);
 
@@ -18,12 +21,12 @@ function MovieCard({ movie, showFavoriteButton = true }) {
     }
   }
 
-  async function onDetailClick() {
-    alert("Clicked");
+  function onDetailClick() {
+    navigate(`/movies/${movie.id}`);
   }
 
   return (
-    <div className="movie-card">
+    <div className="movie-card" onClick={onDetailClick}>
 
         <div className="movie-poster">
           <img
@@ -39,7 +42,7 @@ function MovieCard({ movie, showFavoriteButton = true }) {
           </div>
         </div>
 
-        <div className="movie-info" onClick={onDetailClick}>
+        <div className="movie-info">
           <h3>{movie.title}</h3>
           <p>{movie.release_date?.split("-")[0]}</p>
           <p><strong>⭑</strong> {movie.vote_average.toFixed(1)}/10</p>

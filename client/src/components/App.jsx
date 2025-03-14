@@ -7,6 +7,7 @@ import Favorites from "../pages/Favorites.jsx";
 import AI from "../pages/AI.jsx";
 import NavBar from "./NavBar.jsx";
 import Player from "./Player.jsx";
+import MovieDetail from "./MovieDetail.jsx";
 
 // css and styling
 import "../css/App.css";
@@ -21,6 +22,7 @@ function App() {
           <Route path="/favorites" element={<Favorites />} />
           <Route path="/ai" element={<AI />} />
           <Route path="/player" element={<Player />} />
+          <Route path="/movies/:movieId" element={<MovieDetail />} /> 
         </Routes>
       </main>
     </div>
